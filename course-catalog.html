@@ -46,8 +46,16 @@
             opacity: 0.95;
         }
 
-        .search-bar {
+        .filters {
             margin-bottom: 30px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 250px;
         }
 
         .search-bar input {
@@ -60,6 +68,27 @@
         }
 
         .search-bar input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .category-filter {
+            min-width: 200px;
+        }
+
+        .category-filter select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e8ecf1;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            cursor: pointer;
+        }
+
+        .category-filter select:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
@@ -156,8 +185,20 @@
             <p>Course Catalog</p>
         </div>
 
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search courses...">
+        <div class="filters">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search courses...">
+            </div>
+            <div class="category-filter">
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="Culture/Values">Culture/Values</option>
+                    <option value="Tools/Systems">Tools/Systems</option>
+                    <option value="AI/Technology">AI/Technology</option>
+                    <option value="Workflow/Process">Workflow/Process</option>
+                    <option value="Planning/Connection">Planning/Connection</option>
+                </select>
+            </div>
         </div>
 
         <div id="courseContainer">
@@ -189,6 +230,7 @@
 
                     const courseName = values[0]?.replace(/"/g, '').trim();
                     const duration = values[1]?.replace(/"/g, '').trim();
+                    const category = values[2]?.replace(/"/g, '').trim();
                     const description = values[5]?.replace(/"/g, '').trim();
                     const link = values[6]?.replace(/"/g, '').trim();
 
@@ -196,6 +238,7 @@
                         allCourses.push({
                             name: courseName,
                             duration: duration || 'TBD',
+                            category: category || 'TBD',
                             description: description || 'Course description coming soon.',
                             link: link || ''
                         });
@@ -235,10 +278,13 @@
 
         function renderCourses() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
 
             let filteredCourses = allCourses.filter(course => {
-                return course.name.toLowerCase().includes(searchTerm) ||
-                       course.description.toLowerCase().includes(searchTerm);
+                const matchesSearch = course.name.toLowerCase().includes(searchTerm) ||
+                                     course.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = categoryFilter === 'all' || course.category === categoryFilter;
+                return matchesSearch && matchesCategory;
             });
 
             const container = document.getElementById('courseContainer');
@@ -278,6 +324,7 @@
         }
 
         document.getElementById('searchInput').addEventListener('input', renderCourses);
+        document.getElementById('categoryFilter').addEventListener('change', renderCourses);
 
         loadCourses();
     </script>
