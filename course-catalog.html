@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebLife Onboarding - Course Catalog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,143 +17,89 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
             color: #1a1a1a;
             line-height: 1.6;
+            padding: 40px 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
         }
 
-        /* Header Section */
         .header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             padding: 40px 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 24px;
+            border-radius: 20px;
             color: white;
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
         }
 
         .header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-
-        .header .subtitle {
-            font-size: 1.25rem;
-            font-weight: 400;
-            opacity: 0.95;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .header .stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            display: block;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
         }
 
-        /* Filter Section */
-        .filters {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
+        .search-bar {
+            margin-bottom: 30px;
         }
 
-        .filter-btn {
-            padding: 12px 24px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
+        .search-bar input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e8ecf1;
             border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
         }
 
-        .filter-btn:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        .search-bar input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
 
-        .filter-btn.active {
-            background: #667eea;
-            color: white;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Course Grid */
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 24px;
-            margin-top: 40px;
-        }
-
-        .course-card {
-            background: white;
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #e8ecf1;
+        .course-list {
             display: flex;
             flex-direction: column;
+            gap: 20px;
         }
 
-        .course-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        .course-item {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .course-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
         .course-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 16px;
         }
 
-        .course-title {
+        .course-name {
             font-size: 1.25rem;
-            font-weight: 700;
+            font-weight: 600;
             color: #1a1a1a;
-            line-height: 1.3;
             flex: 1;
         }
 
-        .duration {
+        .course-duration {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 6px 12px;
@@ -163,113 +109,10 @@
             white-space: nowrap;
         }
 
-        .course-meta {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .badge.category {
-            background: #f0f4ff;
-            color: #667eea;
-        }
-
-        .badge.day {
-            background: #fff0f6;
-            color: #d946ef;
-        }
-
-        .badge.priority-HIGH {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .badge.priority-Medium {
-            background: #fef3c7;
-            color: #d97706;
-        }
-
-        .badge.priority-Low {
-            background: #e0f2fe;
-            color: #0284c7;
-        }
-
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            width: fit-content;
-        }
-
-        .status.ready {
-            background: #dcfce7;
-            color: #16a34a;
-        }
-
-        .status.minor {
-            background: #fef3c7;
-            color: #d97706;
-        }
-
-        .status.major {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .status.create {
-            background: #f3e8ff;
-            color: #a855f7;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: currentColor;
-        }
-
-        .description {
+        .course-description {
             color: #4b5563;
             font-size: 0.95rem;
             line-height: 1.6;
-            margin-top: auto;
-        }
-
-        /* Search Bar */
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 16px 24px;
-            border: 2px solid #e8ecf1;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
 
         .loading {
@@ -284,7 +127,7 @@
             padding: 60px 20px;
             color: #dc2626;
             background: #fee2e2;
-            border-radius: 16px;
+            border-radius: 12px;
             margin: 20px 0;
         }
 
@@ -293,16 +136,9 @@
                 font-size: 2rem;
             }
 
-            .course-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .filters {
+            .course-header {
                 flex-direction: column;
-            }
-
-            .filter-btn {
-                width: 100%;
+                align-items: flex-start;
             }
         }
     </style>
@@ -310,35 +146,12 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>WebLife Onboarding!!!!</h1>
-            <p class="subtitle">Complete course catalog for your 3-day onboarding journey</p>
-            <div class="stats">
-                <div class="stat">
-                    <span class="stat-number" id="totalCourses">--</span>
-                    <span class="stat-label">Total Courses</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Days</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">21</span>
-                    <span class="stat-label">Hours</span>
-                </div>
-            </div>
+            <h1>WebLife Onboarding</h1>
+            <p>Course Catalog</p>
         </div>
 
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search courses...">
-        </div>
-
-        <div class="filters" id="filters">
-            <button class="filter-btn active" data-filter="all">All Courses</button>
-            <button class="filter-btn" data-filter="Day 01">Day 01</button>
-            <button class="filter-btn" data-filter="Day 02">Day 02</button>
-            <button class="filter-btn" data-filter="Day 03">Day 03</button>
-            <button class="filter-btn" data-filter="Ready to Use">Ready to Use</button>
-            <button class="filter-btn" data-filter="To Be Created">To Be Created</button>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search courses...">
         </div>
 
         <div id="courseContainer">
@@ -347,51 +160,45 @@
     </div>
 
     <script>
-        // REPLACE THIS URL WITH YOUR PUBLISHED GOOGLE SHEET CSV URL
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTqmWEO0XTrTgyyhDDqUIIKAeInH_HpRkq1f8kFxSeWDaCZIe6GpF9dLZKzrAtusqzgSxeblBm3I8Y5/pub?output=csv';
-        
+
         let allCourses = [];
-        let currentFilter = 'all';
 
         async function loadCourses() {
             try {
                 const response = await fetch(SHEET_URL);
                 const csvText = await response.text();
-                
-                // Parse CSV
-                const lines = csvText.split('\n');
-                const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-                
+
+                const lines = csvText.trim().split('\n');
+                const headers = lines[0].split(',');
+
                 allCourses = [];
-                
-                // Skip first 3 rows (metadata and header)
-                for (let i = 3; i < lines.length; i++) {
-                    if (!lines[i].trim()) continue;
-                    
-                    const values = parseCSVLine(lines[i]);
-                    if (values.length < 7) continue;
-                    
-                    const course = {
-                        name: values[0],
-                        duration: values[1],
-                        category: values[2],
-                        day: values[3],
-                        status: values[4],
-                        priority: values[5],
-                        description: values[6]
-                    };
-                    
-                    if (course.name && course.name !== 'Course Name') {
-                        allCourses.push(course);
+
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+
+                    const values = parseCSVLine(line);
+                    if (values.length < 6) continue;
+
+                    const courseName = values[0]?.replace(/"/g, '').trim();
+                    const duration = values[1]?.replace(/"/g, '').trim();
+                    const description = values[5]?.replace(/"/g, '').trim();
+
+                    if (courseName && courseName !== 'Course Name') {
+                        allCourses.push({
+                            name: courseName,
+                            duration: duration || 'TBD',
+                            description: description || 'Course description coming soon.'
+                        });
                     }
                 }
-                
-                document.getElementById('totalCourses').textContent = allCourses.length;
+
                 renderCourses();
-                
+
             } catch (error) {
                 console.error('Error loading courses:', error);
-                document.getElementById('courseContainer').innerHTML = 
+                document.getElementById('courseContainer').innerHTML =
                     '<div class="error">Failed to load courses. Please check the Google Sheet URL.</div>';
             }
         }
@@ -400,94 +207,56 @@
             const result = [];
             let current = '';
             let inQuotes = false;
-            
+
             for (let i = 0; i < line.length; i++) {
                 const char = line[i];
-                
+
                 if (char === '"') {
                     inQuotes = !inQuotes;
                 } else if (char === ',' && !inQuotes) {
-                    result.push(current.trim());
+                    result.push(current);
                     current = '';
                 } else {
                     current += char;
                 }
             }
-            result.push(current.trim());
-            
+            result.push(current);
+
             return result;
         }
 
         function renderCourses() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            
+
             let filteredCourses = allCourses.filter(course => {
-                const matchesFilter = currentFilter === 'all' || 
-                                     course.day === currentFilter || 
-                                     course.status === currentFilter;
-                const matchesSearch = course.name.toLowerCase().includes(searchTerm) ||
-                                     course.description.toLowerCase().includes(searchTerm) ||
-                                     course.category.toLowerCase().includes(searchTerm);
-                return matchesFilter && matchesSearch;
+                return course.name.toLowerCase().includes(searchTerm) ||
+                       course.description.toLowerCase().includes(searchTerm);
             });
 
             const container = document.getElementById('courseContainer');
-            
+
             if (filteredCourses.length === 0) {
                 container.innerHTML = '<div class="loading">No courses found</div>';
                 return;
             }
 
-            const html = '<div class="course-grid">' + 
-                filteredCourses.map(course => createCourseCard(course)).join('') + 
+            const html = '<div class="course-list">' +
+                filteredCourses.map(course => `
+                    <div class="course-item">
+                        <div class="course-header">
+                            <div class="course-name">${course.name}</div>
+                            <div class="course-duration">${course.duration}</div>
+                        </div>
+                        <div class="course-description">${course.description}</div>
+                    </div>
+                `).join('') +
                 '</div>';
-            
+
             container.innerHTML = html;
         }
 
-        function createCourseCard(course) {
-            const statusClass = course.status.toLowerCase()
-                .replace('ready to use', 'ready')
-                .replace('minor updates needed', 'minor')
-                .replace('major updates needed', 'major')
-                .replace('to be created', 'create');
-            
-            return `
-                <div class="course-card">
-                    <div class="course-header">
-                        <h3 class="course-title">${course.name}</h3>
-                        <div class="duration">${course.duration}</div>
-                    </div>
-                    
-                    <div class="course-meta">
-                        <span class="badge category">${course.category}</span>
-                        <span class="badge day">${course.day}</span>
-                        ${course.priority ? `<span class="badge priority-${course.priority}">${course.priority}</span>` : ''}
-                    </div>
-                    
-                    <div class="status ${statusClass}">
-                        <span class="status-dot"></span>
-                        ${course.status}
-                    </div>
-                    
-                    <p class="description">${course.description}</p>
-                </div>
-            `;
-        }
-
-        // Event Listeners
         document.getElementById('searchInput').addEventListener('input', renderCourses);
 
-        document.getElementById('filters').addEventListener('click', (e) => {
-            if (e.target.classList.contains('filter-btn')) {
-                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-                currentFilter = e.target.dataset.filter;
-                renderCourses();
-            }
-        });
-
-        // Load courses on page load
         loadCourses();
     </script>
 </body>
