@@ -99,6 +99,17 @@
             flex: 1;
         }
 
+        .course-name a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .course-name a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
         .course-duration {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -184,12 +195,14 @@
                     const courseName = values[0]?.replace(/"/g, '').trim();
                     const duration = values[1]?.replace(/"/g, '').trim();
                     const description = values[5]?.replace(/"/g, '').trim();
+                    const link = values[6]?.replace(/"/g, '').trim();
 
                     if (courseName && courseName !== 'Course Name') {
                         allCourses.push({
                             name: courseName,
                             duration: duration || 'TBD',
-                            description: description || 'Course description coming soon.'
+                            description: description || 'Course description coming soon.',
+                            link: link || ''
                         });
                     }
                 }
@@ -244,7 +257,7 @@
                 filteredCourses.map(course => `
                     <div class="course-item">
                         <div class="course-header">
-                            <div class="course-name">${course.name}</div>
+                            <div class="course-name">${course.link ? `<a href="${course.link}" target="_blank">${course.name}</a>` : course.name}</div>
                             <div class="course-duration">${course.duration}</div>
                         </div>
                         <div class="course-description">${course.description}</div>
