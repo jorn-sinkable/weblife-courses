@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /dash-1793a1d3.html
